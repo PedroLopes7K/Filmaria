@@ -10,7 +10,7 @@ function Home() {
     async function loadFilmes() {
       const respostaApi = await api.get('r-api/?api=filmes/')
       // console.log(respostaApi)
-      console.log(respostaApi.data)
+      // console.log(respostaApi.data)
       setFilmes(respostaApi.data)
     }
 
@@ -22,13 +22,11 @@ function Home() {
       <div className="lista-filmes">
         {filmes.map(filmes => {
           return (
-            <div className="container-filme" key={filmes.id}>
-              <h1>{filmes.nome}</h1>
+            <article key={filmes.id}>
+              <strong>{filmes.nome}</strong>
               <img src={filmes.foto} />
-              <h4>Sinopse:</h4>
-              <p className="sinopse">{filmes.sinopse}</p>
-              <Link to="/"> Acessar</Link>
-            </div>
+              <Link to={`/filme/${filmes.id}`}> Acessar</Link>
+            </article>
           )
         })}
       </div>
