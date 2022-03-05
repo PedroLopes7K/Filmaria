@@ -13,9 +13,10 @@ export default function Filme() {
       const resposta = await api.get(`r-api/?api=filmes/${id}`)
 
       if (resposta.data.length === 0) {
-        // tentou acessar com um id que não existe, e levado para a home
-        // alert('ERRO DE ROTA')
+        //  tentou acessar com um id que não existe, e levado para a home
+        alert('ERRO DE ROTA')
         navigate('/')
+        //  navigate substitui o useHistory
         return
       }
       // console.log(resposta.data)
@@ -30,6 +31,22 @@ export default function Filme() {
     }
   }, [navigate, id]) // o useEffact recebe o id pq caso o id mude ele precisa fazer uma nova requisição
 
+  function salvaFilme() {
+    const minhaLista = localStorage.getItem('filmes')
+    let filmesSalvos = JSON.parse(minhaLista) || []
+    // se já tiver um filme com mesmo id precisa ignorar
+    const hasFilme = filmesSalvos.some(filmeSalvo => filmeSalvo.id === filme.id)
+    if (hasFilme == true) {
+      alert('voce ja salvou esse filme')
+      return
+      // para a execução do codigo aqui
+    }
+
+    filmesSalvos.push(filme)
+    localStorage.setItem('filmes', JSON.stringify(filmesSalvos))
+    alert('filme salvo com sucesso')
+  }
+
   if (loading == true) {
     return (
       <div className="filme-info">
@@ -37,6 +54,7 @@ export default function Filme() {
       </div>
     )
   }
+
   return (
     <div className="filme-info">
       {/* <h1>Pagina detalhes - {id}</h1> */}
@@ -46,7 +64,7 @@ export default function Filme() {
       <p>{filme.sinopse}</p>
 
       <div className="botoes">
-        <button onClick={() => {}}>Salvar</button>
+        <button onClick={salvaFilme}>Salvar</button>
 
         <button>
           <a

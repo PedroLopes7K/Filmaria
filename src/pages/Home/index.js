@@ -9,8 +9,11 @@ function Home() {
   useEffect(() => {
     async function loadFilmes() {
       const respostaApi = await api.get('r-api/?api=filmes/')
+
       // console.log(respostaApi)
       // console.log(respostaApi.data)
+      // console.log(respostaApi.data[1].id)
+
       setFilmes(respostaApi.data)
     }
 
