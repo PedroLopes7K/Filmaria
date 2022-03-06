@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './filmes-info.css'
 import { useParams, useNavigate } from 'react-router-dom'
 import api from '../../services/api'
+import { toast } from 'react-toastify'
 export default function Filme() {
   const { id } = useParams()
   const [filme, setFilme] = useState([])
@@ -17,7 +18,8 @@ export default function Filme() {
 
       if (resposta.data.length === 0) {
         //  tentou acessar com um id que não existe, e levado para a home
-        alert('ERRO DE ROTA')
+        // alert('ERRO DE ROTA')
+        toast.info('Erro de rota!')
         navigate('/')
         //  navigate substitui o useHistory
         return
@@ -39,18 +41,20 @@ export default function Filme() {
     let filmesSalvos = JSON.parse(minhaLista) || []
     // se já tiver um filme com mesmo id precisa ignorar
     const hasFilme = filmesSalvos.some(filmeSalvo => filmeSalvo.id === filme.id)
-    if (hasFilme == true) {
-      alert('voce ja salvou esse filme')
+    if (hasFilme === true) {
+      // alert('voce ja salvou esse filme')
+      toast.info('Esse filme já está salvo!')
       return
       // para a execução do codigo aqui
     }
 
     filmesSalvos.push(filme)
     localStorage.setItem('filmes', JSON.stringify(filmesSalvos))
-    alert('filme salvo com sucesso')
+    // alert('filme salvo com sucesso')
+    toast.success('Filme salvo com sucesso!')
   }
 
-  if (loading == true) {
+  if (loading === true) {
     return (
       <div className="filme-info">
         <h1>Carregando dados...</h1>
@@ -64,8 +68,9 @@ export default function Filme() {
       <h1>{filme.nome}</h1>
       <img src={filme.foto} alt={filme.nome} />
       <h3>Sinopse:</h3>
-      <p>{filme.sinopse}</p>
-
+      <div className="sinopse">
+        <p>{filme.sinopse}</p>
+      </div>
       <div className="botoes">
         <button onClick={salvaFilme}>Salvar</button>
 

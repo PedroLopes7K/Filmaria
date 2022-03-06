@@ -27,7 +27,7 @@ function Home() {
           return (
             <article key={filmes.id}>
               <strong>{filmes.nome}</strong>
-              <img src={filmes.foto} />
+              <img src={filmes.foto} alt={filmes.nome} />
               <Link to={`/filme/${filmes.id}`}> Acessar</Link>
             </article>
           )

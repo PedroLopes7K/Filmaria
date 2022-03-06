@@ -1,0 +1,14 @@
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 170px;
+}
+.error .codigo {
+  font-size: 60px;
+  font-weight: 700;
+}
+.error .notfound {
+  font-size: 30px;
+}

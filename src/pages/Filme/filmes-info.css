@@ -1,10 +1,21 @@
 .filme-info {
   display: flex;
   flex-direction: column;
-  max-width: 900px;
+  max-width: 840px;
 }
 .filme-info img {
   border-radius: 20px;
+}
+.filme-info .sinopse {
+  background-color: rgb(211, 232, 243);
+  border-radius: 6px;
+  text-align: center;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+.filme-info .sinopse p {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 17px;
 }
 
 .filme-info button {
