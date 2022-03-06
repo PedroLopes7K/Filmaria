@@ -12,9 +12,6 @@ export default function Filme() {
     async function loadFilme() {
       const resposta = await api.get(`r-api/?api=filmes/${id}`)
 
-      // console.log(resposta.data.id)
-      // console.log(aray)
-
       if (resposta.data.length === 0) {
         //  tentou acessar com um id que não existe, e levado para a home
         alert('ERRO DE ROTA')
